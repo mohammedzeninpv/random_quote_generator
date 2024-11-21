@@ -17,7 +17,18 @@ const quoteElement = document.getElementById("quote");
 function generateQuote() {
     // quoteElement.innerHTML = "Hello World";
 
-    const randomIndx = Math.floor(Math.random() * quotes.length);
-    const quote = quotes[randomIndx];
-    quoteElement.innerHTML = quote;
+    if(usedIndexes.size >= quotes.length){
+        usedIndexes.clear();
+    }
+
+    while(true) {    
+        const randomIndx = Math.floor(Math.random() * quotes.length);
+        
+        if(usedIndexes.has(randomIndx)) continue
+
+        const quote = quotes[randomIndx];
+        quoteElement.innerHTML = quote;
+        usedIndexes.add(randomIndx);
+        break;
+    }
 }
